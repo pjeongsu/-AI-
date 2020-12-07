@@ -1,0 +1,7 @@
+{
+    "REPO_URL":"https://github.com/pjeongsu/deploy", 
+    "PROJECT_NAME":"deploy", 
+    "REMOTE_HOST":"ec2-3-35-37-138.ap-northeast-2.compute.amazonaws.com", 
+    "REMOTE_HOST_SSH":"3.35.37.138", 
+    "REMOTE_USER":"ubuntu"
+}
