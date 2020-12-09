@@ -1,0 +1,63 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="{{url_for('home')}}" class="brand-link">
+    <img src="static/dist/img/AdminLTELogo.png" alt="" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light">AdminLTE 3</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{ name }}</a>
+      </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <!-- ul은 리스트 표현-->
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+             <!-- li는 목록을 표현하는 태그-->
+        <li class="nav-item">
+          <a href="/bbs" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              게시판
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/chat" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              실시간 채팅
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/upload" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              파일 업로드
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,70 @@
+<div class="content-wrapper">
+    {#모든 콘텐츠의 헤더 파트이고, 현재 페이지가 어디에 위치해있는지
+      그 경로를 네비게이션 하고 있다 (모든 페이지는 필수로 유지) #}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">게시판</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{url_for('home')}}">Home</a></li>
+                        <li class="breadcrumb-item active">게시판/검색/ajax</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            {# row 단위로 한줄의 콘텐츠가 생성 #}
+            <div class="row">
+                {# col-lg-숫자(12칸)로 컬럼의 차지하는 크기를 지정 #}
+                <div class="col-lg-12 col-6">
+                    {#  - 게시판 목록 리스트가 들어갈것이다 
+                        - 디비에서 쿼리를 수행하여 데이터를 받아서
+                        - 렌더링시 뿌려서 표현
+                    #}
+                    <table border ='1'>
+                        <thead>
+                            <tr>
+                                <th>회사명</th>
+                                <th>종목코드</th>
+                                <th>업종</th>
+                                <th>주요제품</th>
+                                <th>상장일</th>
+                                <th>결산월</th>
+                                <th>대표자명</th>
+                                <th>홈페이지</th>
+                                <th>지역</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>    
+                            {% for stock in stocks: %}
+                                <tr>
+                                    <td>{{ stock.name }}</td>
+                                    <td>{{ stock.code }}</td>
+                                    <td>{{ stock.indu }}</td>
+                                    <td>{{ stock.product }}</td>
+                                    <td>{{ stock.pubDate }}</td>
+                                    <td>{{ stock.month }}</td>
+                                    <td>{{ stock.owner }}</td>
+                                    <td>{{ stock.homepage }}</td>
+                                    <td>{{ stock.addr }}</td>
+                                </tr>
+                            {% endfor %}
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <!-- ./col -->
+            </div>
+    </section>
+    <!-- /.content -->
+</div>

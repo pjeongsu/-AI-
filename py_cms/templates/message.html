@@ -1,0 +1,18 @@
+<script>
+    // 알림
+    alert('{{msg}}')  
+    // 컴펌
+    /*
+    if (confirm('질의')) { // 예
+    } else { // 아니오
+
+    }
+    */
+    {% if url: %}
+        document.location.href = '{{url}}'.replace('&amp;', '&')
+    {% else: %}
+        // 전달된 url이 없으면 무조건 이전 페이지로 이동
+        history.back()
+    {% endif %}
+</script>
+

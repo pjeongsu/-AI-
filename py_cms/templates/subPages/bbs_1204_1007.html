@@ -1,0 +1,117 @@
+<div class="content-wrapper">
+    {#모든 콘텐츠의 헤더 파트이고, 현재 페이지가 어디에 위치해있는지
+      그 경로를 네비게이션 하고 있다 (모든 페이지는 필수로 유지)#}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">게시판</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{url_for('home')}}">Home</a></li>
+                        <li class="breadcrumb-item active">게시판/검색/ajax</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            {# row 단위로 한줄의 콘텐츠가 생성 #}
+            <div class="row">
+                {# col-lg-숫자(12칸)로 컬럼의 차지하는 크기를 지정 #}
+                <div class="col-lg-12 col-6">
+                    {#  - 게시판 목록 리스트가 들어갈것이다 
+                        - 디비에서 쿼리를 수행하여 데이터를 받아서
+                        - 렌더링시 뿌려서 표현
+                    #}
+                    <div>
+                        <fieldset>
+                            <input type='text' name='keyword' placeholder='회사명 입력'/>
+                            <!-- 검색버튼을, 클릭하면, 검색어를 들고서버로 요청이 간다 -->
+                            <button id='searchBtn'>검색</button>
+                        </fieldset>
+                        {#
+                            - JinJa 템플릿 엔진으로 동적 데이터를 받아서 렌터링 수행시
+                            여러 파일에 걸쳐서 작업이 수행되면 잘 작동을 안한다 -> 한개의 동적 작업은 한개의 파일에서만 수행
+                            - 서버에서 동적 구성으로 만들어지는 부분은 다 텍스트다
+                                => 이런 텍스트가 의미를 가지고 작동하는 타이밍은 클라이언트 사이드에서 브라우저에서 파싱이 된 후 작동한다
+                        #}
+                        <script>
+                            $('#searchBtn').on('click', event =>{
+                                // alert('클릭했다')
+                                // 서버로 검색어를 들고 request를 수행한다. 단, 화면 백단에서 
+                                // 이렇게 수행하면 화면이 껌벅이지 않는다 => AJAX
+                                // 응답 데이터는 JSON으로 받겠다
+                                // jQuery의 기능 -> AJAX를 간단하게 표현하는 기능을 가지고 있다
+                                // get방식으로 가자!
+                                // 변수, var 사용가능, let(변수), const(상수)
+                                // ~?키=값&키=값
+                                let param = $( '[name=keyword]').val() // 검색어 획득
+                                $.get({
+                                    url:'/search', // 서버 주소
+                                    data : 'k=' +param, // 검색어 파라미터, 키=값
+                                    dataType:'json', // json형식으로 보내주세요(xml, txt)
+                                    success:(res)=>{
+                                        console.log('성공', res)
+                                    }, // 통신성공 후 처리할 일 구현(함수) - 익명함수이자 기능적으로 콜백함수
+                                    error:(err)=>{
+                                        console.log('실패', err)
+                                    } // 통신실패
+                                })
+                            })
+                            /*
+                                자바 스크립트의 객체를 표현한다 -> 클래스
+                                1. {}, 객체리터럴, 용도 : 함수의 인자로 파라미터가 많고 다양하면 사용
+                                    일회용 객체, 키=값으로 사용
+                                2. Object 객체 확장, 잘 사용 안함
+                                3. 생성자함수를 이용한 확장
+                                4. 생성자함수를 이용한 확장 + prototype을 이용한 확장 <- 이것으로 라이브러리가 구성되어 있다
+                                5. class ~ 생성자 ~ ... 타언어와 동일(모던스크립트)
+                                    -> reactjs에서 주로 사용한다
+                            */
+                        </script>
+                    </div>
+                    <table border ='1'>
+                        <thead>
+                            <tr>
+                                <th>회사명</th>
+                                <th>종목코드</th>
+                                <th>업종</th>
+                                <th>주요제품</th>
+                                <th>상장일</th>
+                                <th>결산월</th>
+                                <th>대표자명</th>
+                                <th>홈페이지</th>
+                                <th>지역</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>    
+                            {% for stock in stocks: %}
+                                <tr>
+                                    <td>{{ stock.name }}</td>
+                                    <td>{{ stock.code }}</td>
+                                    <td>{{ stock.indu }}</td>
+                                    <td>{{ stock.product }}</td>
+                                    <td>{{ stock.pubDate }}</td>
+                                    <td>{{ stock.month }}</td>
+                                    <td>{{ stock.owner }}</td>
+                                    <td>{{ stock.homepage }}</td>
+                                    <td>{{ stock.addr }}</td>
+                                </tr>
+                            {% endfor %}
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <!-- ./col -->
+            </div>
+    </section>
+    <!-- /.content -->
+</div>

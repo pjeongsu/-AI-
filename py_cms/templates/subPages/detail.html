@@ -1,0 +1,35 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">상세정보보기</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{url_for('home')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url_for('bbs')}}">게시판</a></li>
+                        <li class="breadcrumb-item active">상세정보보기 v1</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            {# row 단위로 한줄의 콘텐츠가 생성 #}
+            <div class="row">
+                {# col-lg-숫자(12칸)로 컬럼의 차지하는 크기를 지정 #}
+                <div class="col-lg-12 col-6">
+                    {# depth가 너무 깊어서 해당 부분을 별도로 다시 뺐다 #}
+                    {% include "modPages/detail.html" %}
+                </div>
+                <!-- ./col -->
+            </div>
+    </section>
+    <!-- /.content -->
+</div>

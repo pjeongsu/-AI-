@@ -1,0 +1,57 @@
+{# 해당 주식의 상세정보를 보는 페이지 #}
+<div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">주식상세정보</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        {% if r == '1' %}
+          <a href="?r=2&code={{ request.args.get("code") }}">수정하기 화면으로 이동</a>
+        {% endif %}  
+        <!-- form태그는 어떤 것도 잘 감쌀 수 있다. 단 overwap 주의!!-->
+        <form method="POST">
+          <input type="hidden" name="code" value="{{ request.args.get("code") }}"/>
+          <!--수정하는 화면에서만 노출된다-->
+          {% if r == '2' %}
+            <button>수정</button>
+          {% endif %}  
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key, value in stock.items(): %}
+              <tr>
+                {# indu, product 컬럼 2개는 수정가능하게 input처리 #}
+                <td>{{key}}</td>
+                {% if r == '1' or key != 'indu' and key != 'pro': %}
+                  <td>
+                    {{value}}
+                  </td>
+                {% else: %}
+                  <td>
+                    <input type="text" name="{{key}}" value="{{value}}"/>
+                  </td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <!-- /.card-body -->
+      <!-- <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+          <li class="page-item"><a class="page-link" href="#">«</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+      </div> -->
+    </div>
+</div>

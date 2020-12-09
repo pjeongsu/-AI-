@@ -1,0 +1,30 @@
+<!-- html을 성분별, 화면별, 기능별 등등 관점에서 분해하여 별도 관리 및
+    유지보수가 원활하도록 나눠서 관리한다. 웹 페이지는 여러개의 페이지가
+    조합되어서 만들어지는 것을 기억 -->
+
+{# - jinJa 엔진의 주석 
+   - 페이지를 삽입하는 문법 -> include "삽입할페이지" or ["","","",...]  -> 리스트 나열은 plan A~D이런 느낌임
+     리스트 형태는 해당 페이지 없을 경우 백업의 의미를 가진다
+     ignore missing 에러가 나도 그냥 넘어가나(무시)
+   #}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  {% include ["a.html","public/head.html"] ignore missing %}
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  {% include "public/nav.html" %}
+  {% include "public/menu.html" %}
+  {% include "subPages/index.html" %}
+  {% include "public/footer.html" %}
+  {% include "public/aside.html" %}
+
+</div>
+<!-- ./wrapper -->
+{% include "public/js.html" %}
+</body>
+</html>

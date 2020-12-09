@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include ["a.html","public/head.html"] ignore missing %}
+</head>
+
+  <body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    {% include "public/nav.html" %}
+    {% include "public/menu.html" %}
+    {% include "subPages/chat.html" %}
+    {% include "public/footer.html" %}
+    {% include "public/aside.html" %}
+
+  </div>
+  {% include "public/js.html" %}
+  </body>
+</html>

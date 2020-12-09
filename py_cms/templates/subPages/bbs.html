@@ -1,0 +1,120 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">게시판</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{url_for('home')}}">Home</a></li>
+                        <li class="breadcrumb-item active">게시판/검색/ajax</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-6">
+                    <div>
+                        <fieldset>
+                            <!--form태그를 사용하면 입력할 때 엔터쳐도 가능-->
+                            <form>
+                                <input type='text' name='keyword' placeholder='회사명 입력'/>
+                                <input type='submit' value='검색'/>
+                            </form>
+                            <ul id='results'>
+                                <!-- css 인라인 방식 : style 속성 -->
+                                <!-- <li><b style="color: red;">삼성</b>전자</li> -->
+                            </ul>
+                        </fieldset>
+                        <script>
+                            // submit 이벤트를 잡겠다(form태그가 발동), submit => 서버에 데이터를 실어서 요청한다
+                            // submit 이벤트를 인터셉트해서 내가 의도한대로(ajax) 통신을 수행하겠다
+                            $('form').on('submit', (evt)=>{
+                                evt.preventDefault()
+                                console.log('이벤트를 인터셉트 했다')
+                                let param = $( '[name=keyword]').val() // 검색어 획득
+                                $.get({
+                                    url:'/search',       // 서버 주소
+                                    data : 'k=' +param,  // 검색어 파라미터, 키=값
+                                    dataType:'json',     // json형식으로 보내주세요(xml, txt)
+                                    success:(res)=>{     // 통신성공 후 처리할 일 구현(함수)
+                                        // console.log('성공', res)
+                                        // js에서 []는 배열, {}는 객체(class)이다
+                                        // $.each(배열, 콜백함수) : 배열에서 한 개씩 꺼내서 콜백함수에 전달하여 호출하겠다
+                                        // -> 여기에서 res가 배열
+
+                                        // 1. ul을 특정한다. 그리고 자식들을 비운다
+                                        $('#results').empty()
+                                        // 2. 데이터를 한 개씩 꺼내서, ul의 자식으로 동적 추가
+                                        let keyword = $('[name=keyword]').val() // 검색어
+                                        $.each(res, (idx, stock)=>{
+                                            console.log(idx, stock)
+                                            // 3. 자식의 형태를 만든다
+                                            let html = `<li>${stock.name}</li>` // js 문자열 포멧팅
+                                            // 4. 자식으로 추가
+                                            $('#results').append(html.replace(keyword, `<b style="color: red;">${keyword}</b>`))
+                                            // 4-1. 클릭 이벤트 연결
+                                            // 계속 li가 추가되면 last(막내)가 계속 바뀐다!! => 의사결정 셀렉터 사용
+                                            $('#results>li:last').on('click', ()=>{
+                                                // alert(stock.name)
+                                                // 해당 페이지 이동 : js로 이동
+                                                document.location.href='{{url_for("detail")}}?r=1&code=' + stock.code
+                                            })
+                                        })
+                                        // 5. 검색어 삭제
+                                        $( '[name=keyword]').val('')
+                                    },                   
+                                    error:(err)=>{         // 통신실패
+                                        console.log('실패', err)
+                                    }                   
+                                })
+                                return false // submit 이벤트 kill
+                            })
+                        </script>
+                    </div>
+                    <table border ='1'>
+                        <thead>
+                            <tr>
+                                <th>회사명</th>
+                                <th>종목코드</th>
+                                <th>업종</th>
+                                <th>주요제품</th>
+                                <th>상장일</th>
+                                <th>결산월</th>
+                                <th>대표자명</th>
+                                <th>홈페이지</th>
+                                <th>지역</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>    
+                            {% for stock in stocks: %}
+                                <tr>
+                                    <td>{{ stock.name     }}</td>
+                                    <td>{{ stock.code     }}</td>
+                                    <td>{{ stock.indu     }}</td>
+                                    <td>{{ stock.product  }}</td>
+                                    <td>{{ stock.pubDate  }}</td>
+                                    <td>{{ stock.month    }}</td>
+                                    <td>{{ stock.owner    }}</td>
+                                    <td>{{ stock.homepage }}</td>
+                                    <td>{{ stock.addr     }}</td>
+                                </tr>
+                            {% endfor %}
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <!-- ./col -->
+            </div>
+    </section>
+    <!-- /.content -->
+</div>
