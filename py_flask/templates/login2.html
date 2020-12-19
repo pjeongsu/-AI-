@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> 로그인 </title>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <!-- post 방식에서는 전송 데이터는 body를 타고 간다
+                - body의 크기는 가변형이다
+                - 파일 전송, 이미지 전송, 동영상 전송 등등 대용량도 전송 OK
+                - 보안에 우수, 데이터가 숨겨져서 전송, 필요하면 암호화도 가능
+                - http => https로 전송 (보편적인 방법)
+                - 로그인에 적합
+            -->
+            <form action="/loginProc" method="POST">
+                <input type='text' name ='uid'placeholder='id'/>
+                <br>  
+                <input type='password' name ='upw'placeholder='Pw'/>
+                <br>
+                <input type='submit' value="로그인 버튼"/>
+            </form>
+        </fieldset>
+    </div>  
+</body>
+</html>

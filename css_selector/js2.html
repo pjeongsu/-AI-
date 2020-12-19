@@ -1,0 +1,42 @@
+
+<!-- 1 => 4 => 클릭 버튼 => 2 => 3 -->
+<html>
+<head> 
+    <!--external js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--internal js-->
+    <script>
+        alert('1')
+        // $(document) 문서 객체, 이 html 자체를 의미
+        // .ready() : 문서가 로드되었다, 준비되었다. 이제 DOM 조작을 해라
+        // js는 비동기 - 콜백함수가 필요 -> 콜백함수는 익명함수 형태로 생김, 
+        // 아무도 호출할 수 없다, 세팅된 곳만 사용가능 
+        // => 현대식(모던 스크립트) 해설 -> 애로우 함수
+        // $(document).ready(function(){})
+        $(document).ready(()=>{
+            alert('2')
+        })
+    </script>
+</head>
+<body>
+    <!--inline js-->
+    <button onclick="javascript:show();">클릭하지 마시오</button>
+    <!--internal js, 조작하고 싶은 엘리먼트 바로 밑에 위치 - 이렇게 쓰면 좋음-->
+    <script>
+        // 표준함수
+        function show()
+        {
+            // 화면이 보이고 나서 alert후 블락 처리를 안하는 것으로 보임
+            alert('3')
+            // DOM 조작
+            $('div').append('DOM 조작')
+        }
+    </script>
+    <div></div>
+    <!--internal js, html이 DOM tree로 메모리에 올라가는 타이밍을 잡기 귀찮다 
+    => 절대적인 위치 body가 닫히기 직전에 위치시키면 된다-->
+    <script>
+        alert('4')
+    </script>
+</body>
+</html>

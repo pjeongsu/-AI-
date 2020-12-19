@@ -1,0 +1,51 @@
+<html>
+<head>
+    <!-- 편의상 자바스크립트 라이브러리인 jQuery를 이용하여 표현하겠다  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--
+        - jQuery는 1. 찾아라(특정해라), 2.처리해라(특정한 대상기준으로 처리)
+        - 1. 특정하는 방법
+            - $( css selector or 사전정의된 객체명 )
+        - 2. 처리해라
+            - 함수 
+    -->
+</head>
+<body>
+    <h1>python</h1>
+    <h2 class='A'>JavaScript</h2>
+    <h2 id='uni'>unity(c#,js,ar,vr,ai+시뮬레이션) </h2>
+    <span class ='A'>가나다</span>
+    <span> 1234 </span>
+    <script>
+        // [1] 이 문서(Document),html 파일)상의 
+        // "모든 요소" 의 "글자색을 빨강색으로 처리"해라
+        // 대상과 액션이 정해짐
+
+        // 모든 요소 특정
+        $('*').css('color','red')
+        // [2] 문서상에 존재하는 모든 h1만 특정해서, 
+        // 글자색 블루로 처리해라 
+        $('h1').css('color','blue')
+        // [3] 문서상에 존재하는 모든 h1, h2등을 특정하여
+        // 전부 lightgreen으로 표현, 열거
+        $('h1,h2').css('color','lightgreen')
+        // [4] unity라는 문구가 들어간 h2(두번째)는
+        // 배경색을 검은색으로 표현
+        // 아이디를 부여하여 처리, 개발자가 부여
+        // 기본원칙 : 한개의 문서 내에서 아이디 값은 고유하다
+        $('#uni').css('background','black')
+        //[5] class 는 여러 요소들에게 공통된 스타일을 적용할때
+        //    사용하는 속성
+        // 클래스 속성값을 A라고 가진 모든 요소를 찾아서
+        // 배경색 노랑색으로 처리
+        $('.A').css('background','yellow')
+
+        // [6] 조합
+        // 문서상에 존재하는 모든 span 요소들 중에
+        // 클래스가 A인 요소
+        $('span.A').css('background','pink')
+        $('.A, #uni, span').css('color','blue')
+        
+    </script>
+</body>
+</html>

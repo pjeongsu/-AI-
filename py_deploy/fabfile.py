@@ -147,6 +147,7 @@ def _update_virtualenv():
         virtualenv_folder, project_folder
     ))
 
+# 옵션
 def _ufw_allow():
     sudo("ufw allow 'Apache Full'")
     sudo("ufw reload")

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> 로그인 </title>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <!-- <form action="/login" method="POST"> -->
+            <!-- 서버측 주소와 현재 페이지 주소가 일치하는 경우
+                (restAPI 사용한 경우) action을 생략하면 현재 I페이지와
+            동일한 주소로 요청이 넘어간다
+            -->
+                <form method="POST">
+                <input type='text' name ='uid'placeholder='id'/>
+                <br>  
+                <input type='password' name ='upw'placeholder='Pw'/>
+                <br>
+                <input type='submit' value="로그인 버튼"/>
+            </form>
+        </fieldset>
+    </div>  
+</body>
+</html>

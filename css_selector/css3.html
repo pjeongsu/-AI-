@@ -1,0 +1,42 @@
+<html>
+<head> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type='text' name='uid'/>
+    <br>
+    <input type='password' name='upw'/>
+    <ol>
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+        <li>F</li>
+    </ol>
+    <script>
+        // 속성 셀렉터 -> input 에서 많이 사용
+        // [9] 문서 상에 존재하는 모든 요소들 중에
+        //     속성이 x이고, 값이 y인 요소를 모두 찾아라
+        //     글자색을 레드로 쳐라
+        // [속성= 속성명]
+        $('[name=uid]').css('color','red')
+        // 입력값 세팅
+        // val() => value 속성을 세팅하거나, 추출하거나
+        $('[name=uid]').val('guest')
+        // 입력값 추출
+        console.log($('[name=uid]').val())
+    
+        // [10] 의사 결정 셀렉터 -> 연속적으로 중복된 엘리먼트가 등장할 때 사용
+        // "셀렉터 : 다양한표현" 
+        // 다양한 표현 : first, last, eq(인덱스)
+        //              gt, lt, nth-child(순서)
+        $('ol>li:first').css('color','red') 
+        $('ol>li:last').css('color','blue') 
+        $('ol>li:eq(2)').css('color','yellow')  // eq는 0부터 시작
+        $('ol>li:nth-child(4)').css('color','pink')  // nth는 1부터 시작
+        $('ol>li:gt(3)').css('background','gray') // -1부터
+        $('ol>li:lt(3)').css('background','gray') // 0부터
+    </script>
+</body>
+</html>

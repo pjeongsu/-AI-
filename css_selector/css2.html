@@ -1,0 +1,31 @@
+<html> -->
+<head> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- ul/ol은 리스트, 통상 css를 적용하여 메뉴쪽 사용-->
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3
+            <ol>
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+            </ol>
+        </li>
+    </ul>
+    <script>
+        $('*').css('color','black')
+    // 서열, 부모/자식간의 관계 , depth
+    // 특정할게 보이지 않는다(수집할 때)
+    // [7] 직계자식 => 부모와 자식
+    // ul 밑에 존재하는 직계 자식 li들의 글자색을 레드로
+        $('ul>li').css('color','red')
+    // [8] 후손포함자식 => 부모와 자식>자식>자식.. 후손
+    // ul 밑에 존재하는 모든 후손 자식
+    // li들의 글자색을 블루처리 
+        $('ul li').css('color','blue')
+    </script>
+</body>
+</html>
